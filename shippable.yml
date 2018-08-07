@@ -1,6 +1,6 @@
 resources:
 # Automation scripts repo
-  - name: aws_ec2_tf_repo
+  - name: aws_ec2_tf_repo-new
     type: gitRepo
     integration: "shipp_github"
     versionTemplate:
@@ -8,16 +8,16 @@ resources:
       branch: master
 
 # AWS credentials
-  - name: aws_ec2_tf_creds
+  - name: aws_ec2_tf_creds-new
     type: integration
     integration: "shipp_aws"
 
 # Terraform State
-  - name: aws_ec2_tf_state
+  - name: aws_ec2_tf_state-new
     type: state
 
 # Output of ec2 provisioning
-  - name: aws_ec2_tf_info
+  - name: aws_ec2_tf_info-new
     type: params
     versionTemplate:
       params:
@@ -30,18 +30,18 @@ resources:
 
 jobs:
 # Provision AWS ec2 with Terraform
-  - name: prov_aws_ec2_tf
+  - name: prov_aws_ec2_tf-new
     type: runSh
     steps:
       - IN: aws_vpc_tf_info
-      - IN: aws_ec2_tf_repo
+      - IN: aws_ec2_tf_repo-new
         switch: off
-      - IN: aws_ec2_tf_state
+      - IN: aws_ec2_tf_state-new
         switch: off
-      - IN: aws_ec2_tf_creds
+      - IN: aws_ec2_tf_creds-new
         switch: off
-      - IN: aws_ec2_tf_ssh
-        switch: off
+      # - IN: aws_ec2_tf_ssh
+      #   switch: off
       - TASK:
           name: prov_ec2
           runtime:
